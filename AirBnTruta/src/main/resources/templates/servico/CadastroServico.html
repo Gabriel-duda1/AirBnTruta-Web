@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" 
+    xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Página de Cadastro de Serviços</h1>
+    
+    <small th:text="${msg}"></small>
+
+    <form method="post" action="/servico/save"
+        th:object="${servico}">
+        <input type="text" th:field="*{nome}"/><br/>
+        <input type="text" th:field="*{tipo}"/><br/>
+        <textarea th:field="*{descricao}"></textarea><br/>
+        <button>save</button>
+    </form>
+</body>
+</html>

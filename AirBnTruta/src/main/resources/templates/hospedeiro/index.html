@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div th:insert="~{frags/menu :: hospedeiro}"></div>
+
+    <a href="/hospedagem/new" class="btn btn-success">Nova Hospedagem</a>
+
+    <div th:if="${hospedagens.size() == 0}" class="h4">
+        Você ainda não possui hospedagens cadastradas!
+    </div>
+
+    <div th:each="hospedagem : ${hospedagens}" th:object="${hospedagem}" style="padding:1%">
+      <div class="card border shadow" 
+        th:style="'width: 18rem;'+${(hospedagem.fugitivo!=null)?'background-color:grey':''}">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${descricaoCurta}"></h5>
+          <h6 class="card-subtitle mb-2 text-muted">Informações da Diária</h6>
+          <div>
+            <p class="card-text" th:text="*{localizacao}">
+            </p>
+            <p class="card-text" th:text="'valor da diária: '+*{diaria}">
+            </p>
+            <p class="card-text" th:text="*{descricaoLonga}">
+
+            </p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <a href="#" th:href="@{/hospedeiro/viewhospedagem/{id}(id=*{codigo})}" class="btn btn-info">detalhe</a>
+            <a href="#" class=" btn btn-dark">interesses</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

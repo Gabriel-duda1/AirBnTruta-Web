@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div th:fragment="servico(action)">
+      <form method="post" action="/servico/save" th:object="${servico}">
+        <input
+          type="text"
+          th:field="*{codigo}"
+          class="form-control"
+          placeholder="codigo"
+          th:if="${action == 'update'}"
+          readonly="true"
+        />
+
+        <input
+          type="text"
+          th:field="*{nome}"
+          class="form-control"
+          placeholder="nome"
+        /><br />
+        <input
+          type="text"
+          th:field="*{tipo}"
+          class="form-control"
+          placeholder="tipo"
+        /><br />
+        <textarea
+          th:field="*{descricao}"
+          class="form-control"
+          placeholder="descrição"
+        ></textarea
+        ><br />
+        <button>save</button>
+      </form>
+    </div>
+
+    <div th:fragment="generic(handler,method,path,bean)">
+      <form th:method="${method}" th:action="${path}" action="#">
+        <div th:each="fn : ${handler.getAttributeNames(bean.getClass())}">
+          <label th:for="'txt'+${fn}" th:text="${fn}"></label>
+          <input th:unless="${fn == 'Senha'}"
+            th:id="'txt'+${fn}"
+            type="text"
+            th:name="${fn}"
+            th:value="${handler.getAttributeValue(bean,fn)}"
+            class="form-control"
+          />
+          <input th:if="${fn == 'Senha'}"
+            th:id="'txt'+${fn}"
+            type="password"
+            th:name="${fn}"
+            th:value="${handler.getAttributeValue(bean,fn)}"
+            class="form-control"
+          />
+        </div>
+        <button class="btn btn-primary">save</button>
+      </form>
+    </div>
+  </body>
+</html>
