@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Minha Hospedagem</title>
+    <div th:insert="~{frags/misc :: bootstrap}"></div>
+</head>
+<body class="container mt-5">
+    <div th:insert="~{frags/menu :: hospedeiro}"></div> 
+
+    <div class="card shadow mt-4">
+        <div class="card-header bg-primary text-white"> <h2 th:text="${hospedagem.descricaoCurta}"></h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Localização:</strong> <span th:text="${hospedagem.localizacao}"></span></p>
+            <p><strong>Valor da Diária:</strong> R$ <span th:text="${hospedagem.diaria}"></span></p>
+            <hr>
+            <h5>Descrição Completa</h5>
+            <p th:text="${hospedagem.descricaoLonga}"></p>
+
+            <div class="alert alert-info mt-4">
+                Essa é a visualização da sua hospedagem cadastrada.
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a href="/hospedeiro" class="btn btn-secondary">Voltar para Minha Lista</a>
+        </div>
+    </div>
+</body>
+</html>

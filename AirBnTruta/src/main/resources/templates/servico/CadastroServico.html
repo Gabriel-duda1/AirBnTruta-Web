@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" 
-    xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de Serviços</title>
 </head>
+
 <body>
     <h1>Página de Cadastro de Serviços</h1>
-    
+
     <small th:text="${msg}"></small>
 
-    <form method="post" action="/servico/save"
-        th:object="${servico}">
-        <input type="text" th:field="*{nome}"/><br/>
-        <input type="text" th:field="*{tipo}"/><br/>
-        <textarea th:field="*{descricao}"></textarea><br/>
-        <button>save</button>
+    <form method="post" th:action="@{/servico/save}" th:object="${servico}">
+        <label for="nome">Nome:</label><br />
+        <input type="text" id="nome" th:field="*{nome}" required /><br /><br />
+
+        <label for="tipo">Tipo:</label><br />
+        <input type="text" id="tipo" th:field="*{tipo}" required /><br /><br />
+
+        <label for="descricao">Descrição:</label><br />
+        <textarea id="descricao" th:field="*{descricao}" required></textarea><br /><br />
+
+        <button type="submit">Salvar</button>
     </form>
+
+    <br />
+    <a th:href="@{/servico}" class="btn">Voltar para lista</a>
 </body>
+
 </html>

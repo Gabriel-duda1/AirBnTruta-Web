@@ -1,11 +1,21 @@
 package com.devcaotics.airBnTruta.model.entities;
 
 public class Servico {
-    
+
     private int codigo;
     private String nome;
     private String tipo;
     private String descricao;
+
+    public Servico() {
+    }
+
+    public Servico(int codigo, String nome, String tipo, String descricao) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.tipo = tipo;
+        this.descricao = descricao;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -38,6 +48,14 @@ public class Servico {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Servico{" +
+                "codigo=" + codigo +
+                ", nome='" + nome + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
+    }
 }

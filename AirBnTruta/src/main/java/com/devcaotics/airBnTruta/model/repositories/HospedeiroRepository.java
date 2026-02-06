@@ -1,11 +1,12 @@
 package com.devcaotics.airBnTruta.model.repositories;
 
-import com.devcaotics.airBnTruta.model.entities.Hospedeiro;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.devcaotics.airBnTruta.model.entities.Hospedeiro;
 
 public final class HospedeiroRepository implements Repository<Hospedeiro, Integer> {
 

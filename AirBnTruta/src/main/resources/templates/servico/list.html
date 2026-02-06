@@ -1,97 +1,46 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <div th:insert="~{frags/misc :: bootstrap}"></div>
-    <title>Document</title>
+    <title>Lista de Serviços</title>
   </head>
   <body>
     <p class="h2">Serviços cadastrados no sistema</p>
     <small th:text="${msg}"></small><br />
-    <button
-      class="btn btn-success"
-      data-bs-toggle="modal"
-      data-bs-target="#modalcadastro"
-    >
-      new
-    </button>
 
-    <table class="table table-striped">
-      <tr class="table-dark">
-        <th>código</th>
-        <th>nome</th>
-        <th>tipo</th>
-        <th>descrição</th>
-        <th>ações</th>
-      </tr>
-      <tr th:each="s : ${servicos}" th:object="${s}">
-        <td th:text="*{codigo}"></td>
-        <td th:text="*{nome}"></td>
-        <td th:text="*{tipo}"></td>
-        <td th:text="*{descricao}"></td>
-        <td>
-          <a
-            href="#"
-            class="btn btn-info"
-            th:href="@{/servico/save/{id}(id=*{codigo})}"
-            >edit</a
-          >
-          <a
-            href="#"
-            th:href="@{/servico/delete/(id=*{codigo})}"
-            class="btn btn-dark"
-            >delete</a>
-        </td>
-      </tr>
+    <a href="/servico/save" class="btn btn-success">Novo Serviço</a>
+    <a href="/hospedeiro" class="btn btn-secondary">Voltar</a>
+
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr class="table-dark">
+          <th>Código</th>
+          <th>Nome</th>
+          <th>Tipo</th>
+          <th>Descrição</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="s : ${servicos}" th:object="${s}">
+          <td th:text="*{codigo}"></td>
+          <td th:text="*{nome}"></td>
+          <td th:text="*{tipo}"></td>
+          <td th:text="*{descricao}"></td>
+          <td>
+            <a class="btn btn-info btn-sm"
+               th:href="@{/servico/save/{id}(id=*{codigo})}">
+              Editar
+            </a>
+            <a class="btn btn-danger btn-sm"
+               th:href="@{/servico/delete(id=*{codigo})}">
+              Excluir
+            </a>
+          </td>
+        </tr>
+      </tbody>
     </table>
-
-    <div class="modal fade" id="modalcadastro" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <!--<div
-              th:if="${servico.codigo == 0}"
-              th:insert="~{frags/forms :: servico('new')}"
-            ></div>
-            <div
-              th:unless="${servico.codigo == 0}"
-              th:insert="~{frags/forms :: servico('update')}"
-            ></div>-->
-            <div th:insert="~{frags/forms :: generic(${@formHandler},'Post','/servico/save',${servico})}"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--<div th:insert="~{frags/forms :: generic('post','/servico/save',${servico})}">--></div>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
-    ></script>
-
-    <div th:unless="${servico.codigo == 0}">
-      <script>
-        const modal = document.getElementById("modalcadastro");
-
-        const mymodal = new bootstrap.Modal(modal);
-        mymodal.show();
-
-        modal.addEventListener("hide.bs.modal", function () {
-          location.href = "/servico";
-        });
-      </script>
-    </div>
   </body>
 </html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Meus Interesses</title>
+    <div th:insert="~{frags/misc :: bootstrap}"></div>
+</head>
+<body class="container mt-5">
+    <div th:insert="~{frags/menu :: fugitivo}"></div>
+
+    <h2 class="mb-4 mt-4">Hospedagens que tenho interesse</h2>
+
+    <table class="table table-striped border shadow">
+        <thead class="table-dark">
+            <tr>
+                <th>Hospedagem</th>
+                <th>Localidade</th>
+                <th>Sua Proposta</th>
+                <th>Preço Diária</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="i : ${interesses}">
+                <td th:text="${i.interesse.descricaoCurta}"></td>
+                <td th:text="${i.interesse.localizacao}"></td>
+                <td th:text="${i.proposta}"></td>
+                <td th:text="'R$ ' + ${i.interesse.diaria}"></td>
+                <td>
+                    <span th:if="${i.realizado == 0}" class="badge bg-warning text-dark">Aguardando Resposta</span>
+                    <span th:if="${i.realizado > 0}" class="badge bg-success">Aceito!</span>
+                </td>
+            </tr>
+            
+            <tr th:if="${#lists.isEmpty(interesses)}">
+                <td colspan="5" class="text-center p-4">Você ainda não demonstrou interesse em nada disponível.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="mt-3">
+        <a th:href="@{/fugitivo}" class="btn btn-primary">Voltar para a busca</a>
+    </div>
+</body>
+</html>

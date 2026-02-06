@@ -9,9 +9,10 @@
     <div th:insert="~{frags/menu :: hospedeiro}"></div>
 
     <a href="/hospedagem/new" class="btn btn-success">Nova Hospedagem</a>
+    <a href="/servico" class="btn btn-success">Novo Servico</a>
 
     <div th:if="${hospedagens.size() == 0}" class="h4">
-        Você ainda não possui hospedagens cadastradas!
+        Você ainda não tem hospedagens cadastradas!
     </div>
 
     <div th:each="hospedagem : ${hospedagens}" th:object="${hospedagem}" style="padding:1%">
@@ -32,9 +33,20 @@
           <div class="d-flex justify-content-between">
             <a href="#" th:href="@{/hospedeiro/viewhospedagem/{id}(id=*{codigo})}" class="btn btn-info">detalhe</a>
             <a href="#" class=" btn btn-dark">interesses</a>
-          </div>
         </div>
       </div>
     </div>
+    <div class="card-body">
+    <h5 class="card-title">
+        <span th:text="${hospedagem.descricaoCurta}"></span>
+        
+        <span class="badge bg-danger" th:if="${facade.quantidadeInteressesHospedagem(hospedagem.codigo) > 0}">
+             NOVO INTERESSE!
+        </span>
+    </h5>
+    
+    <a th:href="@{/hospedeiro/interesses/{id}(id=${hospedagem.codigo})}" 
+       class="btn btn-warning mt-2">Ver Interesses</a>
+</div>
   </body>
 </html>

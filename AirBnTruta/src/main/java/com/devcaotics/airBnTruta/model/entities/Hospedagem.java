@@ -1,4 +1,3 @@
-
 package com.devcaotics.airBnTruta.model.entities;
 
 import java.text.ParseException;
@@ -12,7 +11,7 @@ import java.util.List;
  * @author ALUNO
  */
 public class Hospedagem {
-    
+
     private int codigo;
     private String descricaoCurta;
     private String descricaoLonga;
@@ -20,12 +19,12 @@ public class Hospedagem {
     private double diaria;
     private Date inicio;
     private Date fim;
-    
+
     private Hospedeiro hospedeiro;
     private Fugitivo fugitivo;
     private List<Servico> servicos;
-    
-    public Hospedagem(){
+
+    public Hospedagem() {
         this.inicio = new Date();
         this.servicos = new ArrayList<>();
     }
@@ -109,36 +108,35 @@ public class Hospedagem {
     public void setServicos(List<Servico> servicos) {
         this.servicos = servicos;
     }
-    
-    public void addServico(Servico s){
+
+    public void addServico(Servico s) {
         this.servicos.add(s);
     }
-    
-    public String getInicioFormatado(){
+
+    public String getInicioFormatado() {
         return new SimpleDateFormat("dd/MM/yyyy").format(this.inicio);
     }
-    
-    public String getFimFormatado(){
+
+    public String getFimFormatado() {
         return new SimpleDateFormat("dd/MM/yyyy").format(this.fim);
     }
-    
-    public void setInicio(String data){
-        
+
+    public void setInicio(String data) {
+
         try {
             this.inicio = new SimpleDateFormat("dd/MM/yyyy").parse(data);
         } catch (ParseException ex) {
             System.getLogger(Hospedagem.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
-        
+
     }
-    
-    public void setFim(String data){
+
+    public void setFim(String data) {
         try {
             this.fim = new SimpleDateFormat("dd/MM/yyyy").parse(data);
         } catch (ParseException ex) {
             System.getLogger(Hospedagem.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }
-    
-    
+
 }

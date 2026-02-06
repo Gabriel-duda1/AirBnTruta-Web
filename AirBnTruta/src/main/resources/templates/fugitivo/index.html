@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>AirBnTruta - Fugitivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container mt-4">
+        <form method="get" th:action="@{/fugitivo}" class="border shadow p-3 mb-4 bg-light" style="width: 80%; margin:auto">
+            <div class="row">
+                <div class="col">
+                    <label>Localidade</label>
+                    <input type="text" name="localidade" class="form-control" th:value="${param.localidade}" placeholder="Ex: Recife">
+                </div>
+                <div class="col">
+                    <label>Preço máximo</label>
+                    <input type="number" name="precoMax" class="form-control" th:value="${param.precoMax}" placeholder="Ex: 200">
+                </div>
+            </div>
+            <div class="mt-3 text-center">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a th:href="@{/fugitivo}" class="btn btn-secondary">Limpar</a>
+            </div>
+        </form>
+
+        <div class="row">
+            <div th:each="hospedagem : ${hospedagens}" th:object="${hospedagem}" class="col-md-4 mb-3">
+                <div class="card border shadow h-100">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="*{descricaoCurta}"></h5>
+                        <p class="card-text">
+                            <strong>Local:</strong> <span th:text="*{localizacao}"></span><br>
+                            <strong>Diária:</strong> R$ <span th:text="*{diaria}"></span>
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/fugitivo/viewhospedagem/{id}(id=*{codigo})}" class="btn btn-info btn-sm">Detalhe</a>
+                            <a th:href="@{/fugitivo/meusinteresses}" class="btn btn-dark btn-sm">Interesses</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <small th:text="${msg}"></small>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

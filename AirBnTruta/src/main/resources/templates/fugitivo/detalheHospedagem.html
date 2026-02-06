@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Hospedagem</title>
+    <div th:insert="~{frags/misc :: bootstrap}"></div>
+</head>
+<body class="container mt-5">
+    <div th:insert="~{frags/menu :: fugitivo}"></div>
+
+    <div class="card shadow mt-4">
+        <div class="card-header bg-dark text-white">
+            <h2 th:text="${hospedagem.descricaoCurta}"></h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Localização:</strong> <span th:text="${hospedagem.localizacao}"></span></p>
+            <p><strong>Valor da Diária:</strong> R$ <span th:text="${hospedagem.diaria}"></span></p>
+            <hr>
+            <h5>Descrição Completa</h5>
+            <p th:text="${hospedagem.descricaoLonga}"></p>
+
+            <div class="border p-3 bg-light mt-4">
+                <h5>Demonstrar Interesse</h5>
+                <form th:action="@{/fugitivo/interesse}" method="post">
+                    <input type="hidden" name="hospedagemId" th:value="${hospedagem.codigo}" />
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Sua Proposta</label>
+                        <input type="text" name="proposta" class="form-control" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Tempo de Permanência (dias)</label>
+                        <input type="number" name="tempo" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100">Confirmar Registro de Interesse</button>
+                </form>
+            </div>
+        </div>
+        <div class="card-footer text-center">
+            <a th:href="@{/fugitivo}" class="btn btn-secondary">Voltar para a Lista</a>
+        </div>
+    </div>
+</body>
+</html>
